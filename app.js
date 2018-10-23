@@ -17,6 +17,8 @@ let scaredyCat = new Cat('Scaredy', 'img/scaredy.jpg');
 
 function newCatDiv(cat) {
   let catContainer = document.createElement('div');
+  catContainer.classList = "unclicked";
+  catContainer.classList.add(cat.name);
   catContainer.innerHTML = cat.name + '<br></br><img class="'+cat.name+'" src="img/' + cat.name + '.jpg">' ;
   let mainContainer = document.querySelector('.container');
   mainContainer.appendChild(catContainer);

@@ -11,3 +11,7 @@ span {
 img {
   max-width: 400px;
 }
+
+.unclicked {
+  display: none;
+}
