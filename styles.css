@@ -12,6 +12,6 @@ img {
   max-width: 400px;
 }
 
-.unclicked {
-  display: none;
+.cat-box {
+  float: right;
 }

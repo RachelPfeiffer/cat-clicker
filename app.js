@@ -6,32 +6,56 @@
 //and one with cat picture
 //and one with the click counter
 
-const Cat = function Cat(name, image) {
+const Cat = function Cat(name) {
   this.name = name;
-  this.image = image;
+  this.imagesource = 'img/'+this.name+'.jpg';
   this.clicks = 0;
+  this.sidebar = function() {
+    let catMenu = document.querySelector('.sidebar');
+    let newCatName = document.createElement('div');
+    newCatName.classList = this.name;
+    newCatName.classList.add('sidebar-entry');
+    newCatName.innerText = this.name;
+    catMenu.appendChild(newCatName);
+  }
+}
+const catNames = ['Staredy', 'Scaredy'];
+
+for (x of catNames) {
+  console.log(x);
+  let newCat = new Cat(x);
+  console.log(newCat);
+  newCat.sidebar();
 }
 
-let staredyCat = new Cat('Staredy', 'img/staredy.jpg');
-let scaredyCat = new Cat('Scaredy', 'img/scaredy.jpg');
-
-function newCatDiv(cat) {
+function drawCatDiv(cat) {
+  //create new cat div
   let catContainer = document.createElement('div');
-  catContainer.classList = "unclicked";
-  catContainer.classList.add(cat.name);
-  catContainer.innerHTML = cat.name + '<br></br><img class="'+cat.name+'" src="img/' + cat.name + '.jpg">' ;
+  catContainer.classList.add(cat);
+  catContainer.classList.add("cat-box");
+  //add name & picture
+  catContainer.innerHTML = cat + '<br></br><img class="cat-picture '+cat+'" src="img/' + cat + '.jpg">' ;
   let mainContainer = document.querySelector('.container');
   mainContainer.appendChild(catContainer);
+  //add clicker
   let catClicker = document.createElement('div');
-  catClicker.innerHTML = '<div class="title-click">Clicks: <span class="'+cat.name+'">'+cat.clicks+'</span></div>';
+  catClicker.innerHTML = '<div class="title-click">Clicks: <span class="'+cat+'">'+cat+'</span></div>';
   catContainer.appendChild(catClicker);
 };
 
-newCatDiv(staredyCat);
-newCatDiv(scaredyCat);
 document.addEventListener('click', function(e) {
-  let matchingDivs = document.getElementsByClassName(e.target.classList.value);
-  let currentClickNumber = matchingDivs[1].innerText;
-  let newClickNumber = Number(currentClickNumber) + 1;
-  matchingDivs[1].innerText = newClickNumber;
+  if (e.target.classList.contains('sidebar-entry')) {
+    if (document.querySelector('.cat-box') !== null) {
+      let catBoxToRemove = document.querySelector('.cat-box');
+      catBoxToRemove.parentElement.removeChild(catBoxToRemove);
+    };
+    drawCatDiv(e.target.classList[0]);
+  } else if (e.target.classList.contains('cat-picture')) {
+    let matchingDivs = document.getElementsByClassName(e.target.classList.value);
+    let currentClickNumber = matchingDivs[1].innerText;
+    let newClickNumber = Number(currentClickNumber) + 1;
+    matchingDivs[1].innerText = newClickNumber;
+  } else {
+    return;
+  }
 });
