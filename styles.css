@@ -29,3 +29,17 @@ img {
   border: 2px solid red;
   display: block;
 }
+
+.cat-name {
+  font-size: 2em;
+  color: blue;
+  font-family: fantasy;
+  font-style: italic;
+}
+
+.container {
+  float: right;
+  width: 550px;
+  height: 300px;
+  background-color: green;
+}
