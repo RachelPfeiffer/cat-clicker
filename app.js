@@ -8,6 +8,13 @@ let model = {
 };
 
 let octopus = {
+
+  init: function() {
+    sidebar.render();
+    displayArea.render();
+    displayArea.updateOnClick();
+  },
+
   allCats: function() {
     let cats = [];
     function Cat(name,imageURL,clicks) {
@@ -34,7 +41,12 @@ let octopus = {
     clickedCatClicks: function(x) {
       return model.catClicks[x];
   }
-}
+},
+
+    incrementCatClicks: function(x) {
+      let indexToIncrement = model.catNames.indexOf(x);
+      model.catClicks[indexToIncrement] +=1;
+    }
 }
 
 let sidebar = {
@@ -81,7 +93,7 @@ let displayArea = {
     };
     function updatePic() {
       const picSection = document.querySelector('.cat-pic');
-      picSection.innerHTML = '<img src="'+clickedCatImage+'" alt="There\'s actually an invisible cat sitting here">';
+      picSection.innerHTML = '<img class="cat-pic" src="'+clickedCatImage+'" alt="There\'s actually an invisible cat sitting here">';
     };
     function updateClickArea() {
       const clickSection = document.querySelector('.click-area');
@@ -98,7 +110,12 @@ let displayArea = {
     document.addEventListener('click', function(e) {
       if (e.target.classList.contains('.sidebar-entry')) {
         displayArea.updateInfo(e.target.innerText);
+
+      } else if (e.target.classList.contains('cat-pic')) {
+        octopus.incrementCatClicks(document.querySelector('.cat-name').innerText);
+        displayArea.updateInfo(document.querySelector('.cat-name').innerText);
       }
     });
   }
   }
+octopus.init();
