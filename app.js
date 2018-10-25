@@ -21,11 +21,20 @@ let octopus = {
     return cats;
   },
 
-  findClickedCatInfo: function(x) {
-    const clickedCatIndex =  model.catNames.indexOf(x);
-    return model.catNames[clickedCatIndex] + model.catImages[clickedCatIndex] + model.catClicks[clickedCatIndex];
-
+  findClickedCatInfo: {
+    clickedCatIndex:  function(x) {
+      return model.catNames.indexOf(x);
+    },
+    clickedCatName: function(x) {
+      return model.catNames[x];
+    },
+    clickedCatImage: function(x) {
+      return model.catImages[x];
+    },
+    clickedCatClicks: function(x) {
+      return model.catClicks[x];
   }
+}
 }
 
 let sidebar = {
@@ -62,18 +71,21 @@ let displayArea = {
   },
 
   updateInfo: function(name) {
-    let allCats = octopus.allCats();
+    let clickedCatName = octopus.findClickedCatInfo.clickedCatName(octopus.findClickedCatInfo.clickedCatIndex(name));
+    let clickedCatImage = octopus.findClickedCatInfo.clickedCatImage(octopus.findClickedCatInfo.clickedCatIndex(name));
+    let clickedCatClicks = octopus.findClickedCatInfo.clickedCatClicks(octopus.findClickedCatInfo.clickedCatIndex(name));
+
     function updateName() {
       const nameSection = document.querySelector('.cat-name');
-      nameSection.innerText = allCats[name].name;
+      nameSection.innerText = clickedCatName;
     };
     function updatePic() {
       const picSection = document.querySelector('.cat-pic');
-      picSection.innerHTML = '<img src="'+allCats[name].imageURL+'" alt="There\'s actually an invisible cat sitting here">';
+      picSection.innerHTML = '<img src="'+clickedCatImage+'" alt="There\'s actually an invisible cat sitting here">';
     };
     function updateClickArea() {
       const clickSection = document.querySelector('.click-area');
-      clickSection.innerHTML = '<div>Clicks: </div><div class="click-number">'+ allCats[name].clicks + '</div>';
+      clickSection.innerHTML = '<div>Clicks: </div><div class="click-number">'+ clickedCatClicks + '</div>';
     }
     updateName();
     updatePic();
@@ -85,7 +97,7 @@ let displayArea = {
     const buttons = document.querySelectorAll('.sidebar-entry');
     document.addEventListener('click', function(e) {
       if (e.target.classList.contains('.sidebar-entry')) {
-        console.log(octopus.findClickedCatInfo(3));
+        displayArea.updateInfo(e.target.innerText);
       }
     });
   }
