@@ -1,6 +1,13 @@
 //section 1: the model - in which we'll store all the lists of cats,
 //pictures, and click-numbers
 let model = {
+  cats {
+    {name: 'Scaredy', imageURL: 'img/cat1.jpg', clicks: 0},
+    {name: 'Staredy', imageURL: 'img/cat2.jpg', clicks: 0},
+    {name: 'Weirdy', imageURL: 'img/cat3.jpg', clicks: 0},
+    {name: 'Beardy', imageURL: 'img/cat4.jpg', clicks: 0},
+    {name: 'Dirty', imageURL: 'img/cat5.jpg', clicks: 0}
+  }
   catNumbers: [0,1,2,3,4],
   catNames: ['Scaredy', 'Staredy', 'Weirdy', 'Beardy', 'Dirty'],
   catImages: ['img/cat1.jpg', 'img/cat2.jpg', 'img/cat3.jpg', 'img/cat4.jpg', 'img/cat5.jpg'],
