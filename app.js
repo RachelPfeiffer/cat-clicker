@@ -23,18 +23,6 @@ let octopus = {
   },
 
   allCats: function() {
-    let cats = [];
-    function Cat(name,imageURL,clicks) {
-        this.name = name;
-        this.imageURL = imageURL;
-        this.clicks = clicks;
-      }
-      for (number of model.catNumbers) {
-      cats[number] = new Cat(model.catNames[number], model.catImages[number], model.catClicks[number]);
-    }
-    return cats;
-  },
-
   findClickedCatInfo: {
     clickedCatIndex:  function(x) {
       return model.catNames.indexOf(x);
